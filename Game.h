@@ -36,6 +36,9 @@ public:
     // Properites
     void GetDefaultSize( size_t& width, size_t& height ) const;
 
+    // 描画マネージャー
+    std::shared_ptr<render_manager> i_render_manager;
+
 private:
 
     void Update(DX::StepTimer const& timer);

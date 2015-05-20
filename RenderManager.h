@@ -40,4 +40,9 @@ public:
     void create_resource();
     // デバイスロスト時
     void on_device_lost();
+
+    // Direct3Dのオブジェクト更新
+    void update_d3d(
+        Microsoft::WRL::ComPtr<ID3D11Device> device,
+        Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
 };

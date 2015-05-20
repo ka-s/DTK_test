@@ -80,3 +80,12 @@ void render_manager::on_device_lost()
     // Statesリセット
     m_states.reset();
 }
+
+// Direct3Dのオブジェクト更新
+void render_manager::update_d3d(
+    Microsoft::WRL::ComPtr<ID3D11Device> device,
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
+{
+    d3dDevice = device;
+    d3dContext = context;
+}

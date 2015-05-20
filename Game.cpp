@@ -15,6 +15,8 @@ Game::Game() :
     m_window(0),
     m_featureLevel( D3D_FEATURE_LEVEL_9_1 )
 {
+    // 描画マネージャー作成
+    i_render_manager = std::make_shared<render_manager>(m_d3dDevice, m_d3dContext);
 }
 
 // Initialize the Direct3D resources required to run.
@@ -65,7 +67,7 @@ void Game::Render()
 
     // TODO: Add your rendering code here
 
-    // i_render_manager->render();
+    i_render_manager->render();
 
     Present();
 }
@@ -212,7 +214,8 @@ void Game::CreateDevice()
 
     // TODO: Initialize device dependent objects here (independent of window size)
 
-    // i_render_manager->create_dvice();
+    i_render_manager->update_d3d(m_d3dDevice, m_d3dContext);
+    i_render_manager->create_device();
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.
@@ -340,7 +343,7 @@ void Game::CreateResources()
 
     // TODO: Initialize windows-size dependent objects here
 
-    // i_render_manager->create_resource();
+    i_render_manager->create_resource();
 }
 
 void Game::OnDeviceLost()
@@ -357,7 +360,7 @@ void Game::OnDeviceLost()
     m_d3dDevice1.Reset();
     m_d3dDevice.Reset();
 
-    // i_render_manager->on_device_lost();
+    i_render_manager->on_device_lost();
 
     CreateDevice();
 
