@@ -16,7 +16,7 @@ Game::Game() :
     m_featureLevel( D3D_FEATURE_LEVEL_9_1 )
 {
     // 描画マネージャー作成
-    i_render_manager = std::make_shared<render_manager>(m_d3dDevice, m_d3dContext);
+    i_render_manager = std::make_shared<render_manager>();
 }
 
 // Initialize the Direct3D resources required to run.

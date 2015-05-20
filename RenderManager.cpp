@@ -11,14 +11,6 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 using Microsoft::WRL::ComPtr;
 
-render_manager::render_manager(
-    Microsoft::WRL::ComPtr<ID3D11Device> device,
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
-{
-    d3dDevice = device;
-    d3dContext = context;
-}
-
 // •`‰æ
 void render_manager::render()
 {

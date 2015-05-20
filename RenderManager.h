@@ -28,10 +28,6 @@ private:
     Microsoft::WRL::ComPtr<ID3D11DeviceContext>     d3dContext;
 
 public:
-    render_manager(
-        Microsoft::WRL::ComPtr<ID3D11Device> device, 
-        Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
-
     // 描画
     void render();
     // デバイス作成
