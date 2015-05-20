@@ -18,7 +18,6 @@ private:
     std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
     // 座標
     DirectX::SimpleMath::Vector2 m_screenPos;
-    DirectX::SimpleMath::Vector2 m_origin;
 
     // ステータス
     std::unique_ptr<DirectX::CommonStates> m_states;
