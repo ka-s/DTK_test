@@ -11,10 +11,10 @@
 class screen_manager
 {
 private:
+    // texture t_cat;
 
 public:
     screen_manager();
-    ~screen_manager();
 
     void update();
     void render();

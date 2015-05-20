@@ -36,9 +36,6 @@ public:
     // Properites
     void GetDefaultSize( size_t& width, size_t& height ) const;
 
-    // 描画マネージャー
-    std::shared_ptr<render_manager> i_render_manager;
-
 private:
 
     void Update(DX::StepTimer const& timer);
@@ -67,4 +64,9 @@ private:
 
     // Game state
     DX::StepTimer                                   m_timer;
+
+    // 描画マネージャー
+    std::shared_ptr<render_manager> i_render_manager;
+    // 画面マネージャー
+    std::shared_ptr<screen_manager> i_screen_manager;
 };
