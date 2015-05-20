@@ -36,18 +36,6 @@ public:
     // Properites
     void GetDefaultSize( size_t& width, size_t& height ) const;
 
-    // texture
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
-
-    // SpriteBatch
-    std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
-    // VectorPosition
-    DirectX::SimpleMath::Vector2 m_screenPos;
-    DirectX::SimpleMath::Vector2 m_origin;
-
-    // States
-    std::unique_ptr<DirectX::CommonStates> m_states;
-
 private:
 
     void Update(DX::StepTimer const& timer);

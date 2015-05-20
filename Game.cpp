@@ -67,15 +67,6 @@ void Game::Render()
 
     // i_render_manager->render();
 
-    // StartRenderSpriteBatch
-    m_spriteBatch->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
-
-    // RenderCat
-    m_spriteBatch->Draw(m_texture.Get(), m_screenPos, nullptr, Colors::White, 0.f, m_origin);
-
-    // EndRenderSpriteBatch
-    m_spriteBatch->End();
-
     Present();
 }
 
@@ -220,32 +211,8 @@ void Game::CreateDevice()
 #endif
 
     // TODO: Initialize device dependent objects here (independent of window size)
-    // SpriteBatchReset
-    m_spriteBatch.reset(new SpriteBatch(m_d3dContext.Get()));
-    // MakeResource
-    ComPtr<ID3D11Resource> resource;
 
-    // LoadTexture
-    DX::ThrowIfFailed(
-        CreateWICTextureFromFile(m_d3dDevice.Get(), L"cat.png", resource.GetAddressOf(),
-        m_texture.ReleaseAndGetAddressOf()));
-
-    // MakeCatTexture
-    ComPtr<ID3D11Texture2D> cat;
-    // CatException
-    DX::ThrowIfFailed(resource.As(&cat));
-
-    // MakeCatDesc
-    CD3D11_TEXTURE2D_DESC catDesc;
-    // GetCatDesc
-    cat->GetDesc(&catDesc);
-
-    // SetOriginVector
-    m_origin.x = float(catDesc.Width / 2);
-    m_origin.y = float(catDesc.Height / 2);
-
-    // StatesReset
-    m_states.reset(new CommonStates(m_d3dDevice.Get()));
+    // i_render_manager->create_dvice();
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.
@@ -373,9 +340,7 @@ void Game::CreateResources()
 
     // TODO: Initialize windows-size dependent objects here
 
-    // SetScreneVector
-    m_screenPos.x = backBufferWidth / 2.f;
-    m_screenPos.y = backBufferHeight / 2.f;
+    // i_render_manager->create_resource();
 }
 
 void Game::OnDeviceLost()
@@ -392,12 +357,7 @@ void Game::OnDeviceLost()
     m_d3dDevice1.Reset();
     m_d3dDevice.Reset();
 
-    // TextureReset
-    m_texture.Reset();
-    // SpriteBatchReset
-    m_spriteBatch.reset();
-    // StatesReset
-    m_states.reset();
+    // i_render_manager->on_device_lost();
 
     CreateDevice();
 
