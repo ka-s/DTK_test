@@ -77,11 +77,25 @@ void render_manager::create_device()
     m_effect->SetPerPixelLighting(true);
     m_effect->SetLightingEnabled(true);
     m_effect->SetLightEnabled(0, true);
-    m_effect->SetLightDiffuseColor(0, Colors::White);
+    m_effect->SetLightDiffuseColor(0, Colors::Orange);
     m_effect->SetLightDirection(0, -Vector3::UnitY);
     m_shape->CreateInputLayout(m_effect.get(),
                                m_inputLayout.ReleaseAndGetAddressOf());
     m_effect->SetTexture(t_cat.Get());
+
+    // model shadow
+    m_model->UpdateEffects([](IEffect* effect)
+    {
+        auto lights = dynamic_cast<IEffectLights*>(effect);
+        if (lights)
+        {
+            //lights->SetPerPixelLighting(true);
+            //lights->SetLightingEnabled(true);
+            //lights->SetLightEnabled(0, true);
+            //lights->SetLightDiffuseColor(0, Colors::Aqua);
+            lights->SetLightDirection(0, -Vector3::UnitY);
+        }
+    });
 }
 
 // ƒŠƒ\[ƒXì¬
@@ -92,9 +106,9 @@ void render_manager::create_resource()
     m_screenPos.y = 0.f;
 
     // 3DObject
-    m_view = Matrix::CreateLookAt(Vector3(0.f, 2.f, 4.f), Vector3::Zero, Vector3::UnitY);
+    m_view = Matrix::CreateLookAt(v_camera, Vector3::Zero, Vector3::UnitY);
     m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
-        800.f / 600.f, 0.1f, 10.f);
+        800.f / 600.f, 0.1f, 128.f);
 
     // light
     m_effect->SetView(m_view);
@@ -130,4 +144,9 @@ void render_manager::update_d3d(
 {
     d3dDevice = device;
     d3dContext = context;
+}
+
+void render_manager::update()
+{
+    v_camera.x += 0.1f;
 }

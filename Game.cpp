@@ -54,6 +54,7 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here
     elapsedTime;
+    i_render_manager->update();
 }
 
 // Draws the scene

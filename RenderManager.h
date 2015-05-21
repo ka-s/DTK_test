@@ -44,6 +44,10 @@ private:
     std::unique_ptr<DirectX::BasicEffect> m_effect;
     Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 
+    // camera
+    DirectX::SimpleMath::Vector3 v_camera = 
+        DirectX::SimpleMath::Vector3(-4.f, 2.f, 4.f);
+
 public:
     // 描画
     void render();
@@ -53,6 +57,8 @@ public:
     void create_resource();
     // デバイスロスト時
     void on_device_lost();
+    // Update
+    void update();
 
     // Direct3Dのオブジェクト更新
     void update_d3d(
