@@ -29,6 +29,12 @@ private:
     Microsoft::WRL::ComPtr<ID3D11Device>            d3dDevice;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext>     d3dContext;
 
+    // 3DObject
+    DirectX::SimpleMath::Matrix m_world;
+    DirectX::SimpleMath::Matrix m_view;
+    DirectX::SimpleMath::Matrix m_proj;
+    std::unique_ptr<DirectX::GeometricPrimitive> m_shape;
+
 public:
     // •`‰æ
     void render();
