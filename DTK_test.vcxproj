@@ -151,6 +151,7 @@
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -163,6 +164,7 @@
     </ClCompile>
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
