@@ -35,6 +35,10 @@ private:
     DirectX::SimpleMath::Matrix m_proj;
     std::unique_ptr<DirectX::GeometricPrimitive> m_shape;
 
+    // model
+    std::unique_ptr<DirectX::IEffectFactory> m_fxFactory;
+    std::unique_ptr<DirectX::Model> m_model;
+
 public:
     // •`‰æ
     void render();

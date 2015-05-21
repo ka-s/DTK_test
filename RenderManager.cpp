@@ -22,10 +22,13 @@ void render_manager::render()
     //m_spriteBatch->Draw(t_cat.Get(), Vector2(100.f, 100.f), nullptr, Colors::White, 0.f);
 
     // 文字描画
-    m_font->DrawString(m_spriteBatch.get(), L"Hello World!",
+    m_font->DrawString(m_spriteBatch.get(), L"Hello Cats!",
         Vector2(100.f, 0.f), Colors::White);
 
-    m_shape->Draw(m_world, m_view, m_proj, Colors::White, t_cat.Get());
+    //m_shape->Draw(m_world, m_view, m_proj, Colors::White, t_cat.Get());
+
+    // Model
+    m_model->Draw(d3dContext.Get(), *m_states, m_world, m_view, m_proj);
 
     // SpriteBatch描画終了
     m_spriteBatch->End();
@@ -55,6 +58,10 @@ void render_manager::create_device()
     // 3DObject
     m_shape = GeometricPrimitive::CreateSphere(d3dContext.Get());
     m_world = Matrix::Identity;
+    m_world = Matrix::CreateWorld(Vector3(0.f, 0.f, 0.f), Vector3::Forward, Vector3::UnitY);
+    // Model
+    m_fxFactory.reset(new EffectFactory(d3dDevice.Get()));
+    m_model = Model::CreateFromCMO(d3dDevice.Get(), L"cup.cmo", *m_fxFactory);
 }
 
 // リソース作成
@@ -78,6 +85,9 @@ void render_manager::on_device_lost()
     t_cat.Reset();
     // 3DObject
     m_shape.reset();
+    // Model
+    m_fxFactory.reset();
+    m_model.reset();
     // FontReset
     m_font.reset();
     // SpriteBatchリセット
