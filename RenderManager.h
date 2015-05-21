@@ -31,6 +31,7 @@ private:
 
     // 3DObject
     DirectX::SimpleMath::Matrix m_world;
+    DirectX::SimpleMath::Matrix m_floor;
     DirectX::SimpleMath::Matrix m_view;
     DirectX::SimpleMath::Matrix m_proj;
     std::unique_ptr<DirectX::GeometricPrimitive> m_shape;
@@ -38,6 +39,10 @@ private:
     // model
     std::unique_ptr<DirectX::IEffectFactory> m_fxFactory;
     std::unique_ptr<DirectX::Model> m_model;
+
+    // light
+    std::unique_ptr<DirectX::BasicEffect> m_effect;
+    Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 
 public:
     // •`‰æ

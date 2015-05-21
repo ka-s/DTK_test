@@ -25,7 +25,10 @@ void render_manager::render()
     m_font->DrawString(m_spriteBatch.get(), L"Hello Cats!",
         Vector2(100.f, 0.f), Colors::White);
 
-    //m_shape->Draw(m_world, m_view, m_proj, Colors::White, t_cat.Get());
+    // shape
+    m_effect->SetWorld(m_floor);
+    //m_shape->Draw(m_floor, m_view, m_proj, Colors::White, t_cat.Get());
+    m_shape->Draw(m_effect.get(), m_inputLayout.Get());
 
     // Model
     m_model->Draw(d3dContext.Get(), *m_states, m_world, m_view, m_proj);
@@ -56,12 +59,29 @@ void render_manager::create_device()
     m_font.reset(new SpriteFont(d3dDevice.Get(), L"meiryo.spritefont"));
 
     // 3DObject
-    m_shape = GeometricPrimitive::CreateSphere(d3dContext.Get());
+    m_shape = GeometricPrimitive::CreateCube(d3dContext.Get());
     m_world = Matrix::Identity;
-    m_world = Matrix::CreateWorld(Vector3(0.f, 0.f, 0.f), Vector3::Forward, Vector3::UnitY);
+    m_world = Matrix::CreateWorld(Vector3(0.f, 1.f, 0.f), Vector3::Forward, Vector3::UnitY);
+
+    m_floor = Matrix::Identity;
+    m_floor = Matrix::CreateWorld(Vector3(0.f, 0.f, 0.f), Vector3::Forward, Vector3::UnitY);
+    m_floor = Matrix::CreateScale(Vector3(10.f, 1.f, 10.f));
+
     // Model
     m_fxFactory.reset(new EffectFactory(d3dDevice.Get()));
     m_model = Model::CreateFromCMO(d3dDevice.Get(), L"cup.cmo", *m_fxFactory);
+
+    // light
+    m_effect.reset(new BasicEffect(d3dDevice.Get()));
+    m_effect->SetTextureEnabled(true);
+    m_effect->SetPerPixelLighting(true);
+    m_effect->SetLightingEnabled(true);
+    m_effect->SetLightEnabled(0, true);
+    m_effect->SetLightDiffuseColor(0, Colors::White);
+    m_effect->SetLightDirection(0, -Vector3::UnitY);
+    m_shape->CreateInputLayout(m_effect.get(),
+                               m_inputLayout.ReleaseAndGetAddressOf());
+    m_effect->SetTexture(t_cat.Get());
 }
 
 // リソース作成
@@ -72,9 +92,13 @@ void render_manager::create_resource()
     m_screenPos.y = 0.f;
 
     // 3DObject
-    m_view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f), Vector3::Zero, Vector3::UnitY);
+    m_view = Matrix::CreateLookAt(Vector3(0.f, 2.f, 4.f), Vector3::Zero, Vector3::UnitY);
     m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
         800.f / 600.f, 0.1f, 10.f);
+
+    // light
+    m_effect->SetView(m_view);
+    m_effect->SetProjection(m_proj);
 }
 
 // デバイスロスト時
@@ -88,6 +112,9 @@ void render_manager::on_device_lost()
     // Model
     m_fxFactory.reset();
     m_model.reset();
+    // light
+    m_effect.reset();
+    m_inputLayout.Reset();
     // FontReset
     m_font.reset();
     // SpriteBatchリセット
