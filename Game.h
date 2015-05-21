@@ -67,6 +67,4 @@ private:
 
     // 描画マネージャー
     std::shared_ptr<render_manager> i_render_manager;
-    // 画面マネージャー
-    std::shared_ptr<screen_manager> i_screen_manager;
 };

@@ -17,8 +17,6 @@ Game::Game() :
 {
     // 描画マネージャー作成
     i_render_manager = std::make_shared<render_manager>();
-    // 画面マネージャー作成
-    i_screen_manager = std::make_shared<screen_manager>();
 }
 
 // Initialize the Direct3D resources required to run.
@@ -56,9 +54,6 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here
     elapsedTime;
-
-    // 画面更新
-    i_screen_manager->update();
 }
 
 // Draws the scene
@@ -72,9 +67,6 @@ void Game::Render()
 
     // TODO: Add your rendering code here
 
-    i_render_manager->render();
-
-    // 画面に描画
     i_render_manager->render();
 
     Present();

@@ -41,7 +41,6 @@
 
 // MyFiles
 #include "RenderManager.h"
-#include "ScreenManager.h"
 
 namespace DX
 {
