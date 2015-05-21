@@ -20,6 +20,10 @@ private:
 protected:
     // テクスチャ
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> t_cat;
+
+    // Font
+    std::unique_ptr<DirectX::SpriteFont> m_font;
 
     // スプライトバッチ
     std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
