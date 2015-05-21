@@ -21,6 +21,10 @@ void render_manager::render()
     m_spriteBatch->Draw(m_texture.Get(), m_screenPos, nullptr, Colors::White, 0.f);
     m_spriteBatch->Draw(t_cat.Get(), Vector2(100.f, 100.f), nullptr, Colors::White, 0.f);
 
+    // 文字描画
+    m_font->DrawString(m_spriteBatch.get(), L"Hello World!",
+        Vector2(100.f, 0.f), Colors::White);
+
     // SpriteBatch描画終了
     m_spriteBatch->End();
 }
@@ -44,7 +48,7 @@ void render_manager::create_device()
     m_states.reset(new CommonStates(d3dDevice.Get()));
 
     // フォントリセット
-    m_font.reset(new SpriteFont(d3dDevice.Get(), L"myfile.spritefont"));
+    m_font.reset(new SpriteFont(d3dDevice.Get(), L"meiryo.spritefont"));
 }
 
 // リソース作成

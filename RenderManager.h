@@ -14,19 +14,16 @@ private:
     // 座標
     DirectX::SimpleMath::Vector2 m_screenPos;
 
+    // スプライトバッチ
+    std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
     // ステータス
     std::unique_ptr<DirectX::CommonStates> m_states;
-
-protected:
-    // テクスチャ
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> t_cat;
-
     // Font
     std::unique_ptr<DirectX::SpriteFont> m_font;
 
-    // スプライトバッチ
-    std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+    // テクスチャ
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> t_cat;
 
     // Direct3Dのオブジェクト
     Microsoft::WRL::ComPtr<ID3D11Device>            d3dDevice;
