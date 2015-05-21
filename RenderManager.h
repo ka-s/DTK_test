@@ -11,16 +11,18 @@
 class render_manager
 {
 private:
-    // テクスチャ
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
-
-    // スプライトバッチ
-    std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
     // 座標
     DirectX::SimpleMath::Vector2 m_screenPos;
 
     // ステータス
     std::unique_ptr<DirectX::CommonStates> m_states;
+
+protected:
+    // テクスチャ
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+
+    // スプライトバッチ
+    std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 
     // Direct3Dのオブジェクト
     Microsoft::WRL::ComPtr<ID3D11Device>            d3dDevice;

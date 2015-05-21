@@ -8,14 +8,14 @@
 
 #include "pch.h"
 
-class texture
+class texture : public render_manager
 {
 private:
 
 public:
     // コンストラクタ
     //   テクスチャパスを渡す
-    texture(std::wstring pass);
+    texture(wchar_t* pass);
 
     // 描画メソッド
     void render();
